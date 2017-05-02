@@ -1,4 +1,4 @@
-package hello;
+package dailyexpense;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan({"hello"})
-@EntityScan({"model"})
+@ComponentScan({"dailyexpense"})
+@EntityScan({"dailyexpense/entity"})
 public class Application {
 
     public static void main(String[] args) {

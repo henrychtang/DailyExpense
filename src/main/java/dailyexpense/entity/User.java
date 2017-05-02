@@ -1,4 +1,4 @@
-package model;
+package dailyexpense.entity;
 
 
 import javax.persistence.Entity;
@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * An entity User composed by three fields (id, email, name).
- * The Entity annotation indicates that this class is a JPA entity.
+ * An dailyexpense.entity User composed by three fields (id, email, name).
+ * The Entity annotation indicates that this class is a JPA dailyexpense.entity.
  * The Table annotation specifies the name for the table in the db.
  *
  */

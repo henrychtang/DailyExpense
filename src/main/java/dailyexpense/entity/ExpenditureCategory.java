@@ -1,4 +1,4 @@
-package model;
+package dailyexpense.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

@@ -1,7 +1,6 @@
-package hello;
+package dailyexpense.dao;
 
-import model.ExpenditureCategory;
-import model.User;
+import dailyexpense.entity.ExpenditureCategory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
