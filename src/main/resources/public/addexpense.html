@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="expenseApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,10 +14,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/expense.js"></script>
 </head>
 
 <body>
@@ -46,16 +46,92 @@
     </div>
 </nav>
 
-<div class="container">
+<div>
+    <label>Name:</label>
+    <input type="text" ng-model="yourName" placeholder="Enter a name here">
+    <hr>
+    <h1>Hello {{yourName}}!</h1>
+</div>
 
+<div class="container"  ng-controller="expenseController as expenseList">
+
+    <li ng-repeat="expense in expenseList.expenses">
+    {{expense.category}}
+    </li>
     <div class="lead">
-        <h1>Home</h1>
-        <h3>Problem</h3>
-        <p class="lead">My maid used to have a written note book to keep track on what she spent.  However, this is very unstructured and difficult to manage.
-            And I don't have much time to look into it regularly. </p>
-        <h3>Solution</h3>
-        <p class="lead">This app is a simple way to keep track on the daily household expense in a more structural way. My maid will be responsible for the expense entries.
-        And I can make use of the data to generate reports.</p>
+        <h1><span class="glyphicon glyphicon-edit"></span> Add Expense</h1>
+    </div>
+
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Amount (HKD)</th>
+        <th>Last modified</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th></th>
+        <th>Opening Balance</th>
+        <th>142.00</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>20170510</td>
+        <td>Wellcome</td>
+        <td>100.00</td>
+        <td>20170501 13:46</td>
+    </tr>
+    <tr>
+        <td>20170510</td>
+        <td>Wet Market</td>
+        <td>53.00</td>
+        <td>20170510 13:50</td>
+    </tr>
+    <tr>
+        <td>20170510</td>
+        <td>Cake Shop</td>
+        <td>35.00</td>
+        <td>20170510:13:53</td>
+    </tr>
+
+
+    </tbody>
+    <tfoot>
+    <tr>
+        <th></th>
+        <th>Outstanding Balance</th>
+        <th>320.00</th>
+        </th>
+    </tr>
+    </tfoot>
+
+</table>
+
+
+    <div class="row">
+        <div class="col-sm-4">Date</div>
+        <div class="col-sm-8"> <input type="date" id="inputDate" class="form-control"
+                                      placeholder="Date" required autofocus>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Category</div>
+        <div class="col-sm-8"> <input type="category" id="inputCategory" class="form-control"
+                                      placeholder="Category">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Amount (HKD)</div>
+        <div class="col-sm-8"> <input type="number" id="inputAmount" class="form-control"
+                                      placeholder="Amount">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8"><button type="button" class="btn-primary">Submit</button></div>
     </div>
 
 </div><!-- /.container -->
