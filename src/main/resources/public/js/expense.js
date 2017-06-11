@@ -10,29 +10,79 @@ angular.module('expenseApp', [])
     $http.get("expense/list")
   .then(function(response) {
       $scope.todoList.expenses = response.data;
+      console.log(todoList.expenses);
   });
 
 
 
+    todoList.category="Market";
+    todoList.addExpense = function(){
+        console.log("addExpense called");
+    	var newExpense = {
 
-    $scope.addExpense = function(){
-		$scope.expense.push(newExpense);
-		// Writing it to the server
-		//
-		var dataObj = {
-				name : $scope.name,
-				employees : $scope.employees,
-				headoffice : $scope.headoffice
+				date : todoList.date.toISOString(),
+				category : todoList.category,
+				amount : todoList.amount+""
 		};
-		var res = $http.post('/savecompany_json', dataObj);
-		res.success(function(data, status, headers, config) {
-			$scope.message = data;
+		console.log(newExpense);
+
+		var res = $http.post('expense/add_json', newExpense).
+		then(function onSuccess(response) {
+			$scope.message = response.data;
+			console.log("refreshing");
+            todoList.refreshExpenseList();
+            console.log("done!");
+		}).
+		catch(function onError(response) {
+			alert( "failure message: " + JSON.stringify({data: response.data}));
 		});
-		res.error(function(data, status, headers, config) {
-			alert( "failure message: " + JSON.stringify({data: data}));
+	};
+
+    //refreshExpenseList
+     todoList.refreshExpenseList=function(){
+         $http.get("expense/list")
+           .then(function(response) {
+               $scope.todoList.expenses = response.data;
+               console.log(todoList.expenses);
+           }).
+           catch(function onError(response) {
+           			alert( "failure message: " + JSON.stringify({data: response.data}));
+           		});
+     };
+
+    //getTotal
+    todoList.getTotal=function(){
+    var total = 0;
+    if(todoList.expenses!=null) {
+        for(var i = 0; i < todoList.expenses.length; i++){
+            var expense = todoList.expenses[i];
+            total += Number(expense.amount);
+        }
+        }
+        return total;
+    };
+    //deleteExpense
+    todoList.deleteExpense = function(recordId){
+        console.log("deleteExpense called");
+    	var newExpense = {
+    	        "id" : recordId
+		};
+		console.log(newExpense);
+
+		var res = $http.post('expense/delete_json', newExpense).
+		then(function onSuccess(response) {
+			$scope.message = response.data;
+			console.log($scope.message);
+			console.log("refreshing list");
+            todoList.refreshExpenseList();
+            console.log("done!");
+		}).
+		catch(function onError(response) {
+			alert( "failure message: " + JSON.stringify({data: response.data}));
 		});
 
 
+	};
 
     todoList.todos = [
       {text:'learn AngularJS', done:true},

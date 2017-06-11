@@ -2,6 +2,7 @@ package dailyexpense.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 
 @Entity
@@ -12,7 +13,7 @@ public class Expenditure {
     int id;
 
     @NotNull
-    String date;
+    Date date;
     @NotNull
     String category;
     @NotNull
@@ -25,7 +26,7 @@ public class Expenditure {
         this.id = id;
     }
 
-    public Expenditure(String date, String category, String amount) {
+    public Expenditure(Date date, String category, String amount) {
         this.date = date;
         this.category = category;
         this.amount = amount;
@@ -39,11 +40,11 @@ public class Expenditure {
         this.id = id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

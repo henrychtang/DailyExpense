@@ -5,9 +5,11 @@ import dailyexpense.entity.ExpenditureCategory;
 import dailyexpense.entity.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ExceptionDepthComparator;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -30,8 +32,19 @@ public class ExpenditureDao {
         return userId;
     }
 
+    public String deleteExpenditure(int id){
+        try {
+            Expenditure expenditure = new Expenditure();
+            expenditure.setId(id);
+            sessionFactory.getCurrentSession().delete(expenditure);
+            return true+"";
+        }catch (Exception ex){
+            return "Error deleting the expenditure: " + ex.toString();
 
-    public String addExpendure(String date, String category, String amount) {
+        }
+    }
+
+    public String addExpendure(Date date, String category, String amount) {
         String id;
         try {
             Expenditure expenditure = new Expenditure(date, category, amount);
@@ -48,25 +61,16 @@ public class ExpenditureDao {
     public List<Expenditure> getExpenditureList() {
         final List<Expenditure> list = sessionFactory.getCurrentSession()
                 .createQuery("from Expenditure").list();
-        System.out.println(list);
-        return list;
-    }
-
-    public List<ExpenditureCategory> listExpendlistCategory() {
-        final List<ExpenditureCategory> list = sessionFactory.getCurrentSession()
-                .createQuery("from User").list();
         return list;
     }
 
     public String deleteExpenditure(String id) {
         String userId;
         try {
-            System.out.println("want to detlete: " +id);
             Expenditure expenditure = new Expenditure();
             expenditure.setId(Integer.parseInt(id));
             sessionFactory.getCurrentSession().delete(expenditure);
             userId = String.valueOf(expenditure.getId());
-
         } catch (Exception ex) {
             return "Error deleteing the expenditure expenditure: " + ex.toString();
         }
