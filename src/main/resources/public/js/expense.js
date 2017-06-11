@@ -38,6 +38,22 @@ angular.module('expenseApp', [])
 		});
 	};
 
+var today=new Date();
+todoList.selectedDate=today;
+     //getExpenseByDate
+     todoList.getExpenseByDate=function(dateElement){
+     todoList.selectedDate=dateElement;
+         $http.get("expense/report/"+dateElement)
+           .then(function(response) {
+               $scope.todoList.expenses = response.data;
+               console.log(todoList.expenses);
+           }).
+           catch(function onError(response) {
+           			alert( "failure message: " + JSON.stringify({data: response.data}));
+           		});
+     };
+
+
     //refreshExpenseList
      todoList.refreshExpenseList=function(){
          $http.get("expense/list")
@@ -49,6 +65,20 @@ angular.module('expenseApp', [])
            			alert( "failure message: " + JSON.stringify({data: response.data}));
            		});
      };
+
+
+    //gitDateList
+     todoList.getDateList=function(){
+         $http.get("date/list")
+           .then(function(response) {
+               $scope.todoList.dates = response.data;
+               console.log(todoList.dates);
+           }).
+           catch(function onError(response) {
+           			alert( "failure message: " + JSON.stringify({data: response.data}));
+           		});
+     };
+     todoList.dates=todoList.getDateList();
 
     //getTotal
     todoList.getTotal=function(){

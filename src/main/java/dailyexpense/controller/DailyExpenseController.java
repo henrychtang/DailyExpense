@@ -45,7 +45,16 @@ public class DailyExpenseController {
 
     @RequestMapping("/reportbydate")
     public boolean reportByDate(@RequestParam String date) {
-
         return true;
+    }
+
+    @RequestMapping("/expense/report/{date}")
+    public List<Expenditure> expenseReportByDate(@PathVariable("date") String date) {
+        return expenditureDao.getExpenditureList(date);
+    }
+
+    @RequestMapping("/date/list")
+    public List<String> dateList() {
+        return expenditureDao.getDistinctDateList();
     }
 }
