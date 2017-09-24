@@ -8,7 +8,7 @@ pipeline {
         }
       stage('Test') {
             steps {
-                echo 'Running Unit Test
+                echo 'Running Unit Test'
             }
         }
       stage('Upload Artifacts') {
