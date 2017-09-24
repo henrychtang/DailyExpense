@@ -11,7 +11,7 @@ pipeline {
                 echo 'Running Unit Test'
                 step{
                     echo 'test on area 1'
-
+                }
                 step{
                     echo 'test on area 2'
                 }
