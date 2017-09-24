@@ -1,14 +1,25 @@
 pipeline {
     agent any
     stages {
-        stage('Stage 1') {
+        stage('Build') {
             steps {
-                echo 'Hello World'
+                echo 'Building'
             }
         }
-      stage('Stage 2') {
+      stage('Test') {
             steps {
-                echo 'Hello World2'
+                echo 'Running Unit Test
+            }
+        }
+      stage('Upload Artifacts') {
+            steps {
+                echo 'Upload Artifacts to Nexus'
+            }
+        }
+      stage('Deploy') {
+            steps {
+                echo 'Stop App with port 5000'
+                echo 'Deploy App with port 5000'
             }
         }
     }
